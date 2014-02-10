@@ -4,6 +4,8 @@
 
 require 'mechanize'
 
+HOST="http://localhost:3000"
+
 # Setup Mechanize
 agent = Mechanize.new
 page =agent.get('http://localhost:3000/users/sign_in')
@@ -25,6 +27,8 @@ login_form.field_with(type: "password").value = json["password"]
 page = agent.submit(login_form)
 
 
-page = agent.get("http://localhost:3000/wines.json")
-pp page.body
+page = agent.get("#{HOST}/wines.json")
+# pp page.body
 
+headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json'}
+agent.post("#{HOST}/temperatures.json", '{"temperature":{"temperature": "29"}}', headers)
