@@ -1,0 +1,13 @@
+* Winesite temperature
+
+Use Mechanize to send temperatures to the winesite Rails app.
+
+1. Gets temperature on Raspberry PI with TEMP sensor
+2. Signs in
+3. Posts form to temperature with the following data
+   | field       |
+   |-------------|
+   | cellar_id   |
+   | datetime    |
+   | temperature |
+   | humidity    |
