@@ -2,6 +2,7 @@
 #
 # EG: http://mechanize.rubyforge.org/GUIDE_rdoc.html
 
+# Use mechanize to login and give me access to posting data on the site.
 require 'mechanize'
 
 # Change details to suit
@@ -20,6 +21,7 @@ rescue
   exit
 end
 
+# Convert the file into a JSON object which we can easily read
 json=JSON.parse(string)
 
 # Login to my winesite
@@ -35,7 +37,7 @@ params = {
           temperature: {
             cellar_id: CELLAR_ID,
             date: Time.now,
-            temperature: 30,
+            temperature: 25,
             humidity: 20
           }
          }
