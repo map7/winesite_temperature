@@ -15,6 +15,15 @@ This program should read the temperature and humidity from the sensor, then post
    | temperature |
    | humidity    |
 
+** Requirements
+
+- Raspberry PI
+- [[http://www.freetronics.com/blogs/news/7398810-measure-temperature-and-humidity-with-a-raspberry-pi#.Uyl_Rt9TiXB][Temperature & Humidity sensor]]  
+- ruby 1.9.3 or greater (raspbian comes with ruby 1.9.3p194)
+- mechanize
+  : sudo gem install mecahnize
+- Adafruit DHT code (compiled and installed in /usr/local/bin) - [[http://www.wolfe.id.au/2012/12/22/raspberry-pi-temperature-and-humidity-project-construction/][Ref: Mark's blog post]]
+
 ** .winesite config
 
 : {
