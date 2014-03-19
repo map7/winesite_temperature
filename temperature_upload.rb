@@ -44,7 +44,10 @@ def post_readings(settings, readings)
 end
 
 def get_readings
-  while true
+  readout = nil
+
+  # Enter the loop to post readings
+  while readout.nil?
     output = `Adafruit_DHT 2302 4`
 
     lines =  output.split(%r{\n})
@@ -59,20 +62,27 @@ def get_readings
 
       puts "Temperature #{temp}, Humidity #{humidity}"
     end
-
   end
+
+  return temp, humidity
 end
 
+# GET settings & login
 settings = get_user_details
 login(settings)
 
+# GET readings
+temp, humidity = get_readings
+
+# For the reading
 readings = {
   temperature: {
     cellar_id: settings["cellar"],
     date: Time.now,
-    temperature: 20,
-    humidity: 20
+    temperature: temp,
+    humidity: humidity
   }
 }
 
+# POST
 post_readings(settings, readings)
