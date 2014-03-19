@@ -28,9 +28,16 @@ This program should read the temperature and humidity from the sensor, then post
 
 ** .winesite config
 
+Create the /root/.winesite file with the following
 : {
 :         "url":"http://<winesite URL>",
 :         "cellar":"<cellar id to log temperature for>",
 :         "email":"<email for user login>",
 :         "password":"<my password for the site>"
 : }
+
+*Note: It's kept in root's home as it's run by root*
+
+** Running
+
+: sudo ./temperature_upload.rb
