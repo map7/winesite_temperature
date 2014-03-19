@@ -33,21 +33,46 @@ def login(settings)
   page = @agent.submit(login_form)
 end
 
+def post_readings(settings, readings)
+  # page = @agent.get("#{settings['url']}/wines.json")
+  # pp page.body
+
+  headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json'}
+
+  #@agent.post("#{settings['url']}/temperatures.json", '{"temperature":{"temperature": "29"}}', headers)
+  @agent.post("#{settings['url']}/temperatures.json", readings.to_json, headers)
+end
+
+def get_readings
+  while true
+    output = `Adafruit_DHT 2302 4`
+
+    lines =  output.split(%r{\n})
+    readout = lines[2]
+
+    unless readout.nil?
+      readout = readout.split(',')
+
+      # Get the temperature
+      temp = readout[0][/\d+.\d/]
+      humidity = readout[1][/\d+.\d/]
+
+      puts "Temperature #{temp}, Humidity #{humidity}"
+    end
+
+  end
+end
+
 settings = get_user_details
 login(settings)
 
-# page = @agent.get("#{settings['url']}/wines.json")
-# pp page.body
+readings = {
+  temperature: {
+    cellar_id: settings["cellar"],
+    date: Time.now,
+    temperature: 20,
+    humidity: 20
+  }
+}
 
-params = {
-          temperature: {
-            cellar_id: settings["cellar"],
-            date: Time.now,
-            temperature: 20,
-            humidity: 20
-          }
-         }
-headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json'}
-
-#@agent.post("#{settings['url']}/temperatures.json", '{"temperature":{"temperature": "29"}}', headers)
-@agent.post("#{settings['url']}/temperatures.json", params.to_json, headers)
+post_readings(settings, readings)
