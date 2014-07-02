@@ -40,7 +40,7 @@ def post_readings(settings, readings)
   headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json'}
 
   #@agent.post("#{settings['url']}/temperatures.json", '{"temperature":{"temperature": "29"}}', headers)
-  @agent.post("#{settings['url']}/temperatures.json", readings.to_json, headers)
+  @agent.post("#{settings['url']}/cellars/#{settings['cellar']}/temperatures.json", readings.to_json, headers)
 end
 
 def get_readings
